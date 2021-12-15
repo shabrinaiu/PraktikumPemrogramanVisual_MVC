@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
 namespace AlbumRent_MVC.Models
 {
-    public partial class Album
+    [Table("Album")]
+    public class Album
     {
-        public Guid Id { get; set; }
+        [Column("id")]
+        public string Id { get; set; }
+        [Column("name")]
         public string Name { get; set; }
+        [Column("band")]
         public string Band { get; set; }
     }
 }

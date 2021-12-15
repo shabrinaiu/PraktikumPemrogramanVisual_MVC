@@ -25,7 +25,7 @@ namespace AlbumRent_MVC.Controllers
         }
 
         // GET: Albums/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -57,7 +57,6 @@ namespace AlbumRent_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                album.Id = Guid.NewGuid();
                 _context.Add(album);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -66,7 +65,7 @@ namespace AlbumRent_MVC.Controllers
         }
 
         // GET: Albums/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -86,7 +85,7 @@ namespace AlbumRent_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Band")] Album album)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Band")] Album album)
         {
             if (id != album.Id)
             {
@@ -117,7 +116,7 @@ namespace AlbumRent_MVC.Controllers
         }
 
         // GET: Albums/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -137,7 +136,7 @@ namespace AlbumRent_MVC.Controllers
         // POST: Albums/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var album = await _context.Albums.FindAsync(id);
             _context.Albums.Remove(album);
@@ -145,7 +144,7 @@ namespace AlbumRent_MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AlbumExists(Guid id)
+        private bool AlbumExists(string id)
         {
             return _context.Albums.Any(e => e.Id == id);
         }
